@@ -17,6 +17,6 @@
     "expect": true
   },
   "rules": {
-    
+    "no-restricted-syntax": "off"
   }
 }
