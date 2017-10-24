@@ -4,15 +4,13 @@ import humanize from './humanizer';
 const EMPTY_SCHEMA = { type: 'object' };
 
 export default class Validator {
-  customValidator = () => null; // eslint-disable-line
+  customValidator = () => null;
 
   constructor(schema = EMPTY_SCHEMA) {
-    this.update({ validate: () => {}, schema });
+    this.update({ schema });
   }
 
   update({ validate, schema }) {
-    this.customValidator = validate;
-
     if (schema) {
       this.schema = schema;
       this.valid = new Ajv({ allErrors: true }).compile(schema);
@@ -22,9 +20,6 @@ export default class Validator {
   }
 
   errorsFor(data) {
-    const customErrors = this.customValidator(data);
-    const schemaErrors = this.valid(data) ? null : humanize(this.valid.errors);
-
-    return customErrors || schemaErrors ? { ...schemaErrors, ...customErrors } : null;
+    return this.valid(data) ? null : humanize(this.valid.errors);
   }
 }

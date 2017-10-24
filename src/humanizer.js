@@ -6,8 +6,17 @@ export default errors =>
     const { dataPath, message, keyword, params: { missingProperty, type } } = error;
     const path = keyword === 'required' ? `${dataPath}.${missingProperty}` : dataPath;
     const text = humanReadable(keyword, message, dataPath, missingProperty, type);
+    const tokens = path.replace(/^\./, '').split('.');
+    const lastToken = tokens.pop();
 
-    return { ...errors, [path.replace(/^\./, '')]: text };
+    let chunk = errors;
+    for (const name of tokens) {
+      chunk = chunk[name] = chunk[name] || {};
+    }
+
+    chunk[lastToken] = text;
+
+    return errors;
   }, {});
 
 function getNumFromStr(str) {
@@ -30,7 +39,7 @@ function humanReadable(keyword, message, path, missingProperty, type) {
     case 'required':
       return 'is required';
     case 'pattern':
-      return /phone/.test(path) ? 'must be a valid phone number' : 'must match the pattern';
+      return /phone/.test(path) ? 'must be a valid phone number' : 'is malformed';
     case 'format':
       return `must be a valid ${message.match(/"(.+?)"/)[1]}`;
     case 'type':

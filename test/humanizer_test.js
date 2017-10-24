@@ -37,9 +37,13 @@ describe('Ajv errors humanizer', () => {
     expect(humanize(validator.errors)).to.eql({
       name: 'must be less than 8 characters long',
       email: 'must be a valid email',
-      'info.age': 'must be less than or equal to 100',
-      'info.name.first': 'is required',
-      'info.name.last': 'must be a string'
+      info: {
+        age: 'must be less than or equal to 100',
+        name: {
+          first: 'is required',
+          last: 'must be a string'
+        }
+      }
     });
   });
 });
