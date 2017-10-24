@@ -1,0 +1,59 @@
+{
+  "name": "a-plus-forms-json-validator",
+  "version": "0.0.0",
+  "description": "JSON Schema validator ",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha",
+    "lint": "eslint src test",
+    "build": "babel src --out-dir dist/",
+    "precommit": "lint-staged",
+    "prepush": "npm run test",
+    "prepare": "NODE_ENV=production npm run build"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/MadRabbit/a-plus-forms-json-validator.git"
+  },
+  "keywords": [
+    "form",
+    "validator",
+    "json",
+    "schema"
+  ],
+  "author": "Nikolay Nemshilov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MadRabbit/a-plus-forms-json-validator/issues"
+  },
+  "homepage": "https://github.com/MadRabbit/a-plus-forms-json-validator#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "eslint": "^4.9.0",
+    "eslint-config-shortlyster": "^2.4.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.3.0",
+    "mocha": "^4.0.1"
+  },
+  "peerDependencies": {
+    "a-plus-forms": "^0.3.0"
+  },
+  "dependencies": {
+    "ajv": "^5.2.4"
+  }
+}

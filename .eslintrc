@@ -1,0 +1,22 @@
+{
+  "plugins": [
+    "react",
+    "prettier"
+  ],
+  "extends": [
+    "shortlyster",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/react"
+  ],
+  "env": {
+    "mocha": true,
+    "browser": true
+  },
+  "globals": {
+    "expect": true
+  },
+  "rules": {
+    
+  }
+}

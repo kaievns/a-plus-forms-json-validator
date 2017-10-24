@@ -1,0 +1,18 @@
+{
+  "presets": ["react", "stage-1",
+    ["env", { "targets": { "node": "current" } }]
+  ],
+  "plugins": [
+    "transform-class-properties"
+  ],
+  "env": {
+    "production": {
+      "presets": ["react", "stage-1",
+        ["env", { "browsers": ["last 1 versions"] }]
+      ],
+      "plugins": [
+        "transform-class-properties"
+      ]
+    }
+  }
+}
