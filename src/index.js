@@ -5,12 +5,17 @@ const EMPTY_SCHEMA = { type: 'object' };
 
 export default class Validator {
   constructor(schema = EMPTY_SCHEMA) {
-    this.update({ schema });
+    this.schema = schema;
   }
 
-  update({ schema }) {
+  get schema() {
+    return this._schema;
+  }
+
+  set schema(schema) {
+    this._schema = schema;
+
     if (schema) {
-      this.schema = schema;
       this.valid = new Ajv({ allErrors: true }).compile(schema);
     } else {
       this.valid = () => true;
