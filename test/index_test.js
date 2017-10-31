@@ -25,5 +25,13 @@ describe('Validator', () => {
         password: 'is required'
       });
     });
+
+    it('treats empty strings as no data', () => {
+      const badData = { username: '', password: '' };
+      expect(validator.errorsFor(badData)).to.eql({
+        username: 'is required',
+        password: 'is required'
+      });
+    });
   });
 });
