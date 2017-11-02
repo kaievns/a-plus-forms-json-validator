@@ -1,6 +1,6 @@
 {
   "name": "a-plus-forms-json-validator",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "JSON Schema validator ",
   "files": [
     "dist"
@@ -51,7 +51,7 @@
     "mocha": "^4.0.1"
   },
   "peerDependencies": {
-    "a-plus-forms": "^0.3.0"
+    "a-plus-forms": "^0.4.0"
   },
   "dependencies": {
     "ajv": "^5.2.4"
