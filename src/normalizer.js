@@ -6,7 +6,7 @@ export default (originalData = {}, schema = {}) => {
 
   return Object.keys(originalData).reduce((clearData, key) => {
     const value = originalData[key];
-    const requiredAndEmpty = required.includes(key) && value === '';
+    const requiredAndEmpty = required.includes(key) && (value === '' || value === null);
 
     // considering empty strings as non-present data
     clearData[key] = requiredAndEmpty ? undefined : value;
