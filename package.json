@@ -1,6 +1,6 @@
 {
   "name": "a-plus-forms-json-validator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "JSON Schema validator ",
   "files": [
     "dist"
