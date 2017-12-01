@@ -20,7 +20,18 @@ describe('Ajv errors humanizer', () => {
         },
         required: ['age']
       },
-      email: { type: 'string', format: 'email' }
+      email: { type: 'string', format: 'email' },
+      list: {
+        type: 'array',
+        additionalProperties: false,
+        items: {
+          type: 'object',
+          properties: {
+            size: { type: 'string', enum: ['S', 'M', 'L'] }
+          },
+          required: ['size']
+        }
+      }
     },
     required: ['name']
   };
@@ -28,6 +39,7 @@ describe('Ajv errors humanizer', () => {
   const badData = {
     name: 'Super Nikolay',
     info: { age: 666, name: { last: false } },
+    list: [{}, { size: 'S' }, { size: 'blah' }],
     email: 'blah!'
   };
 
@@ -37,6 +49,10 @@ describe('Ajv errors humanizer', () => {
     expect(humanize(validator.errors)).to.eql({
       name: 'must be less than 8 characters long',
       email: 'must be a valid email',
+      list: {
+        0: { size: 'is required' },
+        2: { size: 'is not acceptable' }
+      },
       info: {
         age: 'must be less than or equal to 100',
         name: {

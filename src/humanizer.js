@@ -6,7 +6,10 @@ export default errors =>
     const { dataPath, message, keyword, params: { missingProperty, type } } = error;
     const path = keyword === 'required' ? `${dataPath}.${missingProperty}` : dataPath;
     const text = humanReadable(keyword, message, dataPath, missingProperty, type);
-    const tokens = path.replace(/^\./, '').split('.');
+    const tokens = path
+      .replace(/(^\.|\])/g, '')
+      .replace(/\[/g, '.')
+      .split('.');
     const lastToken = tokens.pop();
 
     let chunk = errors;
@@ -45,7 +48,7 @@ function humanReadable(keyword, message, path, missingProperty, type) {
     case 'type':
       return `must be a ${type}`;
     case 'enum':
-      return 'is not on the list';
+      return 'is not acceptable';
     case 'minLength': {
       const length = getNumFromStr(message);
       return `must be at least ${length} character${length === 1 ? '' : 's'} long`;
