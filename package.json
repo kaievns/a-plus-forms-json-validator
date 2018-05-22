@@ -54,6 +54,6 @@
     "a-plus-forms": "^0.7.0"
   },
   "dependencies": {
-    "ajv": "^6.2.0"
+    "djv": "^2.0.0"
   }
 }

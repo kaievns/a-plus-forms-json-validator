@@ -1,4 +1,4 @@
-import Ajv from 'ajv';
+import Djv from 'djv';
 import humanize from './humanizer';
 import normalize from './normalizer';
 
@@ -17,13 +17,15 @@ export default class Validator {
     this._schema = schema;
 
     if (schema) {
-      this.valid = new Ajv({ allErrors: true }).compile(schema);
+      const djv = new Djv();
+      djv.addSchema('test', schema);
+      this.valid = data => djv.validate('test', data);
     } else {
       this.valid = () => true;
     }
   }
 
   errorsFor(data) {
-    return this.valid(normalize(data, this._schema)) ? null : humanize(this.valid.errors);
+    return this.valid(normalize(data)) ? humanize(this.valid(normalize(data))) : null;
   }
 }
