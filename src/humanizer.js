@@ -1,7 +1,8 @@
 /**
  * Converts Ajv errors into human friendly errors hash
  */
-export default errors =>
+export default errors => {
+  console.log('{', errors, '}')
   errors.reduce((errors, error) => {
     const { dataPath, message, keyword, params: { missingProperty, type } } = error;
     const path = keyword === 'required' ? `${dataPath}.${missingProperty}` : dataPath;
@@ -21,6 +22,7 @@ export default errors =>
 
     return errors;
   }, {});
+}
 
 function getNumFromStr(str) {
   return `${str.match(/\d+/)[0]}`;

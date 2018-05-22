@@ -1,7 +1,7 @@
-import Ajv from 'ajv';
+import Djv from 'djv';
 import humanize from '../src/humanizer';
 
-describe('Ajv errors humanizer', () => {
+describe('Djv errors humanizer', () => {
   const schema = {
     properties: {
       name: { type: 'string', maxLength: 8 },
@@ -33,7 +33,8 @@ describe('Ajv errors humanizer', () => {
         }
       }
     },
-    required: ['name']
+    required: ['name'],
+    id: 'floobtob'
   };
 
   const badData = {
@@ -44,7 +45,7 @@ describe('Ajv errors humanizer', () => {
   };
 
   it('converst the errors alright', () => {
-    const validator = new Ajv({ allErrors: true }).compile(schema);
+    const validator = new Djv().addSchema({ schema });
     validator(badData);
     expect(humanize(validator.errors)).to.eql({
       name: 'must be less than 8 characters long',
